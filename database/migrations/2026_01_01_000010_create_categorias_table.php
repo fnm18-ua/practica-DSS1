@@ -1,3 +1,4 @@
+// 2026_01_01_000010_create_categorias_table.php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -8,16 +9,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nombre');
-            $table->text('descripcion')->nullable();
+            $table->enum('tipo', ['INGRESO', 'GASTO']);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('categorias');
     }
 };

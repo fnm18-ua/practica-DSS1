@@ -1,4 +1,4 @@
-// app/Models/Reparacion.php
+// app/Models/AporteAhorro.php
 <?php
 
 namespace App\Models;
@@ -8,32 +8,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Reparacion extends Model
+class AporteAhorro extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'reparaciones';
+    protected $table = 'aportes_ahorro';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
         'id',
-        'producto_id',
+        'objetivo_ahorro_id',
         'fecha',
-        'descripcion',
-        'coste',
-        'proveedor_servicio',
-        'piezas_sustituidas'
+        'importe',
+        'nota'
     ];
 
     protected $casts = [
         'fecha' => 'date',
-        'coste' => 'decimal:2'
+        'importe' => 'decimal:2'
     ];
 
     // Relaciones
-    public function producto(): BelongsTo
+    public function objetivoAhorro(): BelongsTo
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(ObjetivoAhorro::class);
     }
 }

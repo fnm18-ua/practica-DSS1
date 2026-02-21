@@ -1,4 +1,4 @@
-// app/Models/Grupo.php
+// app/Models/Categoria.php
 <?php
 
 namespace App\Models;
@@ -8,32 +8,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Grupo extends Model
+class Categoria extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'grupos';
+    protected $table = 'categorias';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
         'id',
         'nombre',
-        'fecha_creacion'
-    ];
-
-    protected $casts = [
-        'fecha_creacion' => 'date'
+        'tipo'
     ];
 
     // Relaciones
-    public function miembros(): HasMany
-    {
-        return $this->hasMany(MembresiaGrupo::class);
-    }
-
     public function movimientos(): HasMany
     {
-        return $this->hasMany(MovimientoFinanciero::class, 'grupo_id');
+        return $this->hasMany(MovimientoFinanciero::class);
     }
 }

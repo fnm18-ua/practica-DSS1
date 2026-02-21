@@ -1,3 +1,4 @@
+// 2026_01_01_000002_create_grupos_table.php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -6,22 +7,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('membresia_grupos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('grupos', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('nombre');
+            $table->date('fecha_creacion');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('membresia_grupos');
+        Schema::dropIfExists('grupos');
     }
 };

@@ -1,4 +1,4 @@
-// app/Models/MembresiaGrupo.php
+// app/Models/GastoRecurrente.php
 <?php
 
 namespace App\Models;
@@ -8,25 +8,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MembresiaGrupo extends Model
+class GastoRecurrente extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'membresias_grupo';
+    protected $table = 'gastos_recurrentes';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
         'id',
         'usuario_id',
-        'grupo_id',
-        'fecha_alta',
-        'rol',
-        'estado'
+        'doc_soporte_id',
+        'nombre',
+        'importe',
+        'periodicidad',
+        'proxima_fecha',
+        'activo'
     ];
 
     protected $casts = [
-        'fecha_alta' => 'date'
+        'importe' => 'decimal:2',
+        'proxima_fecha' => 'date',
+        'activo' => 'boolean'
     ];
 
     // Relaciones
@@ -35,8 +39,8 @@ class MembresiaGrupo extends Model
         return $this->belongsTo(Usuario::class);
     }
 
-    public function grupo(): BelongsTo
+    public function documentoSoporte(): BelongsTo
     {
-        return $this->belongsTo(Grupo::class);
+        return $this->belongsTo(DocumentoAdjunto::class, 'doc_soporte_id');
     }
 }
